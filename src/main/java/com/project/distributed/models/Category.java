@@ -2,6 +2,7 @@ package com.project.distributed.models;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.List;
 
 @Entity
 @Table(name = "categories")
@@ -14,6 +15,9 @@ public class Category {
     @Column(name = "category_name")
     @NotNull(groups = Create.class)
     private String categoryName;
+
+    @OneToMany(mappedBy = "category")
+    private List<Movie> movies;
 
     private Category(){
 
@@ -39,6 +43,14 @@ public class Category {
         this.categoryName = categoryName;
     }
 
+    public List<Movie> getMovies() {
+        return movies;
+    }
+
+    public void setMovies(List<Movie> movies) {
+        this.movies = movies;
+    }
+
     public interface Create{
 
     }
@@ -48,6 +60,7 @@ public class Category {
         return "Category{" +
                 "id=" + id +
                 ", categoryName='" + categoryName + '\'' +
+                ", movies=" + movies +
                 '}';
     }
 }

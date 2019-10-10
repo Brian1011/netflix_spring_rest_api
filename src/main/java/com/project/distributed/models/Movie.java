@@ -1,5 +1,7 @@
 package com.project.distributed.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -16,6 +18,7 @@ public class Movie {
     private String name;
 
     @ManyToOne
+    @JsonIgnore
     @NotNull(groups = Create.class)
     @JoinColumn(name = "category_id")
     private Category category;
@@ -50,11 +53,11 @@ public class Movie {
         this.name = name;
     }
 
-    public Category getcategory() {
+    public Category getCategory() {
         return category;
     }
 
-    public void setcategory(Category category) {
+    public void setCategory(Category category) {
         this.category = category;
     }
 

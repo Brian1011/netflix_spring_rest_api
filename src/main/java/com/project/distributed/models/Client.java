@@ -1,6 +1,8 @@
 package com.project.distributed.models;
 
 import javax.persistence.*;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 @Table(name = "clients")
@@ -15,6 +17,9 @@ public class Client {
 
     @Column(name = "name")
     private String name;
+
+    @OneToMany(mappedBy = "clients")
+    private Set<SuggestedMovie> suggestedMovies = new HashSet<>();
 
     public Client(){
 
@@ -49,12 +54,21 @@ public class Client {
         this.name = name;
     }
 
+    public Set<SuggestedMovie> getSuggestedMovies() {
+        return suggestedMovies;
+    }
+
+    public void setSuggestedMovies(Set<SuggestedMovie> suggestedMovies) {
+        this.suggestedMovies = suggestedMovies;
+    }
+
     @Override
     public String toString() {
         return "Client{" +
                 "id=" + id +
                 ", nationalId=" + nationalId +
                 ", name='" + name + '\'' +
+                ", suggestedMovies=" + suggestedMovies +
                 '}';
     }
 }
