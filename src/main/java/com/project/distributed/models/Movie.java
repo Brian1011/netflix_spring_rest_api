@@ -15,9 +15,10 @@ public class Movie {
     @Column(name = "name")
     private String name;
 
+    @ManyToOne
     @NotNull(groups = Create.class)
-    @Column(name = "category_id")
-    private long categoryId;
+    @JoinColumn(name = "category_id")
+    private Category category;
 
     @NotNull(groups = Create.class)
     @Column(name = "type")
@@ -27,9 +28,9 @@ public class Movie {
 
     }
 
-    public Movie(@NotNull String name, @NotNull long categoryId, @NotNull String type) {
+    public Movie(@NotNull String name, @NotNull Category category, @NotNull String type) {
         this.name = name;
-        this.categoryId = categoryId;
+        this.category = category;
         this.type = type;
     }
 
@@ -49,12 +50,12 @@ public class Movie {
         this.name = name;
     }
 
-    public long getCategoryId() {
-        return categoryId;
+    public Category getcategory() {
+        return category;
     }
 
-    public void setCategoryId(long categoryId) {
-        this.categoryId = categoryId;
+    public void setcategory(Category category) {
+        this.category = category;
     }
 
     public String getType() {
@@ -74,7 +75,7 @@ public class Movie {
         return "Movie{" +
                 "id=" + id +
                 ", name='" + name + '\'' +
-                ", categoryId=" + categoryId +
+                ", category=" + category +
                 ", type='" + type + '\'' +
                 '}';
     }

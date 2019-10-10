@@ -12,6 +12,7 @@ public class Category {
     private long id;
 
     @Column(name = "category_name")
+    @NotNull(groups = Create.class)
     private String categoryName;
 
     private Category(){
@@ -36,6 +37,10 @@ public class Category {
 
     public void setCategoryName(String categoryName) {
         this.categoryName = categoryName;
+    }
+
+    public interface Create{
+
     }
 
     @Override
