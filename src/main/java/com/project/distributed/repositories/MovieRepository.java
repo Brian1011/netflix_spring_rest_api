@@ -1,4 +1,7 @@
 package com.project.distributed.repositories;
 
-public class MovieRepository {
+import com.project.distributed.models.Movie;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface MovieRepository extends JpaRepository<Movie, Long> {
 }
