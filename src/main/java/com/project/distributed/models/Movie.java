@@ -11,15 +11,15 @@ public class Movie {
     @Column(name = "id")
     private long id;
 
-    @NotNull
+    @NotNull(groups = Create.class)
     @Column(name = "name")
     private String name;
 
-    @NotNull
+    @NotNull(groups = Create.class)
     @Column(name = "category_id")
     private long categoryId;
 
-    @NotNull
+    @NotNull(groups = Create.class)
     @Column(name = "type")
     private String type;
 
@@ -63,6 +63,10 @@ public class Movie {
 
     public void setType(String type) {
         this.type = type;
+    }
+
+    public interface Create{
+
     }
 
     @Override
