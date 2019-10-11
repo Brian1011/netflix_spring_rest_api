@@ -10,20 +10,25 @@ import javax.validation.constraints.NotNull;
 public class Movie {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull(groups = Update.class)
     @Column(name = "id")
     private long id;
 
     @NotNull(groups = Create.class)
+    @NotNull(groups = Update.class)
     @Column(name = "name")
     private String name;
 
     @ManyToOne
     @JsonIgnore
     @NotNull(groups = Create.class)
+    @NotNull(groups = Update.class)
     @JoinColumn(name = "category_id")
     private Category category;
 
+
     @NotNull(groups = Create.class)
+    @NotNull(groups = Update.class)
     @Column(name = "type")
     private String type;
 
@@ -31,7 +36,7 @@ public class Movie {
 
     }
 
-    public Movie(@NotNull String name, @NotNull Category category, @NotNull String type) {
+    public Movie(@NotNull(groups = Create.class) @NotNull(groups = Update.class) String name, @NotNull(groups = Create.class) @NotNull(groups = Update.class) Category category, @NotNull(groups = Create.class) @NotNull(groups = Update.class) String type) {
         this.name = name;
         this.category = category;
         this.type = type;
@@ -70,6 +75,10 @@ public class Movie {
     }
 
     public interface Create{
+
+    }
+
+    public interface Update{
 
     }
 
