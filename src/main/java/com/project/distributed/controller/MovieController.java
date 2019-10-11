@@ -48,6 +48,12 @@ public class MovieController {
         return movieService.update(movie);
     }
 
+    // delete movie
+    @DeleteMapping(value = "{id}")
+    public void deleteMovie(@PathVariable long id){
+        movieService.delete(id);
+    }
+
     // query available movies
 
 }
