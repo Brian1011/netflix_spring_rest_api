@@ -48,6 +48,7 @@ public class MovieServiceImpl implements MovieService {
     public void delete(long id) {
         //look for the object first
         Movie found = findById(id);
+
         //erase movie
         movieRepository.deleteById(id);
     }

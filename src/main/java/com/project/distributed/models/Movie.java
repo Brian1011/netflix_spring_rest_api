@@ -30,7 +30,7 @@ public class Movie {
     @NotNull(groups = Create.class)
     @NotNull(groups = Update.class)
     @Column(name = "type")
-    private String type;
+    private String type; // original or suggested)
 
     public Movie(){
 
