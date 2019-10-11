@@ -30,6 +30,12 @@ public class CategoryController {
         return categoryService.findAll();
     }
 
+    // get a specific category
+    @GetMapping(value = "{id}")
+    Category findById(@PathVariable long id){
+        return categoryService.findById(id);
+    }
+
     // update
     @PatchMapping
     public Category updateCategory(
