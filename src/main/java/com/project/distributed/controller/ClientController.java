@@ -23,7 +23,7 @@ public class ClientController {
     }
 
     //get by id
-    @GetMapping
+    @GetMapping(value = "{id}")
     Client findById(@PathVariable long id){
         return clientService.findById(id);
     }

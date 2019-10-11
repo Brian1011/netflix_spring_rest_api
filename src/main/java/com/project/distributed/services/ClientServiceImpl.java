@@ -1,29 +1,44 @@
 package com.project.distributed.services;
 
+import com.project.distributed.NotFoundException;
 import com.project.distributed.models.Client;
+import com.project.distributed.repositories.ClientRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
 
 @Service
 public class ClientServiceImpl implements ClientService {
+    private final ClientRepository clientRepository;
+
+    public ClientServiceImpl(ClientRepository clientRepository) {
+        this.clientRepository = clientRepository;
+    }
+
     @Override
     public List<Client> findAll() {
-        return null;
+        return clientRepository.findAll();
     }
 
     @Override
     public Client findById(long id) {
-        return null;
+        return clientRepository.findById(id).orElseThrow(()
+        ->new NotFoundException("No client with the id: "+id));
     }
 
     @Override
     public Client createClient(Client client) {
-        return null;
+        return clientRepository.save(client);
     }
 
     @Override
     public Client update(Client client) {
-        return null;
+        // look for the object
+        Client found = findById(client.getId());
+
+        // update the found client
+        found.setName(client.getName());
+        found.setNationalId(client.getNationalId());
+        return clientRepository.save(found);
     }
 }
