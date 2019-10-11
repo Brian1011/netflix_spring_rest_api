@@ -1,6 +1,7 @@
 package com.project.distributed.models;
 
 import javax.persistence.*;
+import javax.validation.constraints.NotNull;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -9,12 +10,17 @@ import java.util.Set;
 public class Client {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull(groups = Update.class)
     @Column(name = "id")
     private long id;
 
+    @NotNull(groups = Create.class)
+    @NotNull(groups = Update.class)
     @Column(name = "national_id")
     private long nationalId;
 
+    @NotNull(groups = Create.class)
+    @NotNull(groups = Update.class)
     @Column(name = "name")
     private String name;
 
@@ -25,7 +31,7 @@ public class Client {
 
     }
 
-    public Client(long nationalId, String name) {
+    public Client(@NotNull(groups = Create.class) @NotNull(groups = Update.class) long nationalId, @NotNull(groups = Create.class) @NotNull(groups = Update.class) String name) {
         this.nationalId = nationalId;
         this.name = name;
     }
@@ -63,6 +69,14 @@ public class Client {
         this.suggestedMovies = suggestedMovies;
     }
      */
+
+    public interface Create{
+
+    }
+
+    public interface Update{
+
+    }
 
     @Override
     public String toString() {
