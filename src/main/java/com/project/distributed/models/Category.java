@@ -9,6 +9,7 @@ import java.util.List;
 public class Category {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
+    @NotNull(groups = Update.class)
     @Column(name = "id")
     private long id;
 
@@ -54,6 +55,8 @@ public class Category {
     public interface Create{
 
     }
+
+    public interface Update{}
 
     @Override
     public String toString() {

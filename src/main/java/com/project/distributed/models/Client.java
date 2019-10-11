@@ -18,8 +18,8 @@ public class Client {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "clients")
-    private Set<SuggestedMovie> suggestedMovies = new HashSet<>();
+    //@OneToMany(mappedBy = "clients")
+    //private Set<SuggestedMovie> suggestedMovies = new HashSet<>();
 
     public Client(){
 
@@ -54,6 +54,7 @@ public class Client {
         this.name = name;
     }
 
+    /*
     public Set<SuggestedMovie> getSuggestedMovies() {
         return suggestedMovies;
     }
@@ -61,6 +62,7 @@ public class Client {
     public void setSuggestedMovies(Set<SuggestedMovie> suggestedMovies) {
         this.suggestedMovies = suggestedMovies;
     }
+     */
 
     @Override
     public String toString() {
@@ -68,7 +70,7 @@ public class Client {
                 "id=" + id +
                 ", nationalId=" + nationalId +
                 ", name='" + name + '\'' +
-                ", suggestedMovies=" + suggestedMovies +
+                //", suggestedMovies=" + suggestedMovies +
                 '}';
     }
 }
