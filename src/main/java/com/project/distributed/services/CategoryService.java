@@ -12,4 +12,6 @@ public interface CategoryService {
     Category update(Category category);
 
     Category findById(Long id);
+
+    Category findAvailableMovie(long id, String type);
 }

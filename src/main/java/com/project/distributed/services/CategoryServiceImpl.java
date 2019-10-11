@@ -2,6 +2,7 @@ package com.project.distributed.services;
 
 import com.project.distributed.NotFoundException;
 import com.project.distributed.models.Category;
+import com.project.distributed.models.Movie;
 import com.project.distributed.repositories.CategoryRepository;
 import org.springframework.stereotype.Service;
 
@@ -41,4 +42,13 @@ public class CategoryServiceImpl implements CategoryService {
         ->new NotFoundException("No category with the id" + id));
     }
 
+    @Override
+    public Category findAvailableMovie(long id, String type) {
+        //look for the object first
+        //Category home = findById(id);
+
+        String response = "Id: "+id+" \n Type: "+type;
+        System.out.println(response);
+        return categoryRepository.findAvailable(id,type);
+    }
 }

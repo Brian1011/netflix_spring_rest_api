@@ -1,5 +1,6 @@
 package com.project.distributed.controller;
 
+import com.project.distributed.models.Category;
 import com.project.distributed.models.Movie;
 import com.project.distributed.services.MovieService;
 import org.springframework.validation.annotation.Validated;
@@ -54,6 +55,6 @@ public class MovieController {
         movieService.delete(id);
     }
 
-    // query available movies
+
 
 }

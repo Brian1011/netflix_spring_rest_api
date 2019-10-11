@@ -1,5 +1,7 @@
 package com.project.distributed.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -17,6 +19,7 @@ public class Category {
     @NotNull(groups = Create.class)
     private String categoryName;
 
+    //@JsonIgnore
     @OneToMany(mappedBy = "category")
     private List<Movie> movies;
 

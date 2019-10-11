@@ -45,4 +45,15 @@ public class CategoryController {
         return categoryService.update(category);
     }
 
+    // show available movies
+    // query available movies
+    @GetMapping(value = "/available/{id}")
+    public Category availableMovie(
+            @RequestParam String type,
+            @PathVariable long id
+    )
+    {
+        return categoryService.findAvailableMovie(id, type);
+        //return categoryService.findById(id);
+    }
 }
