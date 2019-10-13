@@ -16,4 +16,6 @@ public interface MovieService {
     void delete(long id);
 
     List<Movie> searchMovie(String movieName);
+
+    Movie suggestedMovie(Movie movie, long id);
 }

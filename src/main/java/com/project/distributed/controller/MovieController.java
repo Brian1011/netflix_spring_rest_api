@@ -1,6 +1,5 @@
 package com.project.distributed.controller;
 
-import com.project.distributed.models.Category;
 import com.project.distributed.models.Movie;
 import com.project.distributed.services.MovieService;
 import org.springframework.validation.annotation.Validated;
@@ -60,5 +59,18 @@ public class MovieController {
     public List<Movie> searchMovie(@RequestParam String movieName){
         return movieService.searchMovie(movieName);
     }
+
+    // client suggest a movie
+    // add new movie
+    @PostMapping(value = "/suggest/{id}")
+    Movie clientSuggestMovie(
+            @Validated(Movie.Create.class)
+            @PathVariable long id,
+            @RequestBody Movie movie
+    )
+    {
+        return movieService.suggestedMovie(movie, id);
+    }
+
 
 }
