@@ -8,6 +8,7 @@ import com.project.distributed.models.SuggestedMovie;
 import com.project.distributed.repositories.CategoryRepository;
 import com.project.distributed.repositories.ClientRepository;
 import com.project.distributed.repositories.MovieRepository;
+import com.project.distributed.repositories.SuggestedMovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -17,11 +18,13 @@ public class MovieServiceImpl implements MovieService {
     private final MovieRepository movieRepository;
     private final ClientRepository clientRepository;
     private final CategoryRepository categoryRepository;
+    private final SuggestedMovieRepository suggestedMovieRepository;
 
-    public MovieServiceImpl(MovieRepository movieRepository, ClientRepository clientRepository, CategoryRepository categoryRepository) {
+    public MovieServiceImpl(MovieRepository movieRepository, ClientRepository clientRepository, CategoryRepository categoryRepository, SuggestedMovieRepository suggestedMovieRepository) {
         this.movieRepository = movieRepository;
         this.clientRepository = clientRepository;
         this.categoryRepository = categoryRepository;
+        this.suggestedMovieRepository = suggestedMovieRepository;
     }
 
 
@@ -83,6 +86,7 @@ public class MovieServiceImpl implements MovieService {
 
         // suggest a new movie
         SuggestedMovie suggestedMovie = new SuggestedMovie(found, new_movie);
+        suggestedMovieRepository.save(suggestedMovie);
 
         return new_movie;
     }

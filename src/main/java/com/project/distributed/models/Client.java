@@ -1,8 +1,11 @@
 package com.project.distributed.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import java.util.HashSet;
+import java.util.List;
 import java.util.Set;
 
 @Entity
@@ -24,8 +27,9 @@ public class Client {
     @Column(name = "name")
     private String name;
 
-    //@OneToMany(mappedBy = "clients")
-    //private Set<SuggestedMovie> suggestedMovies = new HashSet<>();
+    //@JsonIgnore
+    @OneToMany(mappedBy = "client")
+    private List<SuggestedMovie> suggestedMovies;
 
     public Client(){
 
@@ -60,15 +64,13 @@ public class Client {
         this.name = name;
     }
 
-    /*
-    public Set<SuggestedMovie> getSuggestedMovies() {
+    public List<SuggestedMovie> getSuggestedMovies() {
         return suggestedMovies;
     }
 
-    public void setSuggestedMovies(Set<SuggestedMovie> suggestedMovies) {
+    public void setSuggestedMovies(List<SuggestedMovie> suggestedMovies) {
         this.suggestedMovies = suggestedMovies;
     }
-     */
 
     public interface Create{
 
@@ -84,7 +86,7 @@ public class Client {
                 "id=" + id +
                 ", nationalId=" + nationalId +
                 ", name='" + name + '\'' +
-                //", suggestedMovies=" + suggestedMovies +
+                ", suggestedMovies=" + suggestedMovies +
                 '}';
     }
 }

@@ -1,5 +1,7 @@
 package com.project.distributed.models;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 
@@ -10,11 +12,13 @@ public class SuggestedMovie {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private long id;
 
+    @JsonIgnore
     @OneToOne
     @NotNull(groups = Create.class)
     @JoinColumn(name = "client_id")
     private Client client;
 
+    //@JsonIgnore
     @OneToOne
     @NotNull(groups = Create.class)
     @JoinColumn(name = "movie_id")
@@ -57,5 +61,12 @@ public class SuggestedMovie {
 
     }
 
-
+    @Override
+    public String toString() {
+        return "SuggestedMovie{" +
+                "id=" + id +
+                ", client=" + client +
+                ", movie=" + movie +
+                '}';
+    }
 }
