@@ -52,4 +52,10 @@ public class MovieServiceImpl implements MovieService {
         //erase movie
         movieRepository.deleteById(id);
     }
+
+    @Override
+    public List<Movie> searchMovie(String movieName) {
+        return movieRepository.findByNameIgnoreCaseContaining(movieName);
+    }
+
 }

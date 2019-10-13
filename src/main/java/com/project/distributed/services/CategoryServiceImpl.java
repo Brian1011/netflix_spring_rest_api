@@ -49,6 +49,16 @@ public class CategoryServiceImpl implements CategoryService {
 
         String response = "Id: "+id+" \n Type: "+type;
         System.out.println(response);
-        return categoryRepository.findAvailable(id,type);
+        if(type.equals("original")){
+            System.out.println("original");
+            return categoryRepository.findCatBySuggested(id,type);
+        }else if(type.equals("suggested")){
+            System.out.println("suggested");
+            return categoryRepository.findCatBySuggested(id,type);
+        }else {
+            System.out.println("others");
+            return categoryRepository.findCatBySuggested(id,type);
+            //return categoryRepository.fi(id, type);
+        }
     }
 }

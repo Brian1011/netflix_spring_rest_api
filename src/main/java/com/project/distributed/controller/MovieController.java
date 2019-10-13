@@ -55,6 +55,10 @@ public class MovieController {
         movieService.delete(id);
     }
 
-
+    // search movie
+    @GetMapping(value = "/search")
+    public List<Movie> searchMovie(@RequestParam String movieName){
+        return movieService.searchMovie(movieName);
+    }
 
 }
