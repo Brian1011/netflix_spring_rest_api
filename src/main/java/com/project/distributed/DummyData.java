@@ -23,14 +23,16 @@ public class DummyData implements CommandLineRunner {
 
     @Override
     public void run(String... args) throws Exception {
-        // Category
-        //Category new_cat = new Category("Cartoon");
-        //categoryRepository.save(new_cat);
-
-       //Movie movie = new Movie("Dexter",new_cat,"original");
-       //movieRepository.save(movie);
-        // System.out.println(movie);
-
-
+//        Movie movie = new Movie("Amazing Spiderman", "original");
+//        movieRepository.save(movie);
+//
+//        // Category
+//        Category new_cat = categoryRepository.save(new Category("Comedy"));
+//        new_cat.addMovie(movie);
+//        categoryRepository.save(new_cat);
+//
+//        Category cat2 = categoryRepository.save(new Category("Action"));
+//        cat2.addMovie(movie);
+//        categoryRepository.save(cat2);
     }
 }

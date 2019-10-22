@@ -4,6 +4,7 @@ import com.project.distributed.NotFoundException;
 import com.project.distributed.models.Category;
 import com.project.distributed.models.Movie;
 import com.project.distributed.repositories.CategoryRepository;
+import com.project.distributed.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -11,9 +12,11 @@ import java.util.List;
 @Service
 public class CategoryServiceImpl implements CategoryService {
     private final CategoryRepository categoryRepository;
+    private final MovieRepository movieRepository;
 
-    public CategoryServiceImpl(CategoryRepository categoryRepository) {
+    public CategoryServiceImpl(CategoryRepository categoryRepository, MovieRepository movieRepository) {
         this.categoryRepository = categoryRepository;
+        this.movieRepository = movieRepository;
     }
 
     @Override
@@ -60,5 +63,28 @@ public class CategoryServiceImpl implements CategoryService {
             return categoryRepository.findCatBySuggested(id,type);
             //return categoryRepository.fi(id, type);
         }
+    }
+
+    @Override
+    public Category addMovieToCategory(long id, long movieId) {
+        Movie foundMovie = movieRepository.findById(movieId).orElseThrow(()
+                ->new NotFoundException("No movie with the id "+id)
+        );
+
+        Category foundCategory = categoryRepository.findById(id).orElseThrow(()
+                ->new NotFoundException("No category with the id" + id));
+
+        foundCategory.addMovie(foundMovie);
+        return categoryRepository.save(foundCategory);
+
+//        return categoryRepository.findById(id).orElseThrow(()
+//                ->new NotFoundException("No category with the id" + id));
+        //return foundCategory
+    }
+
+    @Override
+    public Category addMovieToCat(Long id) {
+        return categoryRepository.findById(id).orElseThrow(()
+                ->new NotFoundException("No category with the id" + id));
     }
 }

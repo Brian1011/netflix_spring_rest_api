@@ -4,7 +4,9 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Table(name = "categories")
@@ -20,8 +22,16 @@ public class Category {
     private String categoryName;
 
     //@JsonIgnore
-    @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
-    private List<Movie> movies;
+   // @OneToMany(mappedBy = "category",fetch = FetchType.LAZY)
+   // private List<Movie> movies;
+
+    @JsonIgnore
+    @ManyToMany
+    @JoinTable(name = "movie_categories",
+            joinColumns = @JoinColumn(name = "category_id"),
+            inverseJoinColumns = @JoinColumn(name = "movie_id")
+    )
+    private Set<Movie> movies = new HashSet<>();
 
     private Category(){
 
@@ -47,12 +57,20 @@ public class Category {
         this.categoryName = categoryName;
     }
 
-    public List<Movie> getMovies() {
+//    public List<Movie> getMovies() {
+//        return movies;
+//    }
+//
+//    public void setMovies(List<Movie> movies) {
+//        this.movies = movies;
+//    }
+
+    public Set<Movie> getMovieSet() {
         return movies;
     }
 
-    public void setMovies(List<Movie> movies) {
-        this.movies = movies;
+    public void setMovieSet(Set<Movie> movieSet) {
+        this.movies = movieSet;
     }
 
     public interface Create{
@@ -61,12 +79,7 @@ public class Category {
 
     public interface Update{}
 
-    @Override
-    public String toString() {
-        return "Category{" +
-                "id=" + id +
-                ", categoryName='" + categoryName + '\'' +
-                ", movies=" + movies +
-                '}';
+    public void addMovie(Movie movie){
+        movies.add(movie);
     }
 }

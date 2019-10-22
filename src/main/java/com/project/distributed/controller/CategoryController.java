@@ -56,4 +56,10 @@ public class CategoryController {
         return categoryService.findAvailableMovie(id, type);
         //return categoryService.findById(id);
     }
+
+    // add movie to category
+    @GetMapping(value = "/{id}/addMovie/{movieId}")
+    Category addMovieToCategory(@PathVariable long id, @PathVariable long movieId){
+        return categoryService.addMovieToCategory(id, movieId);
+    }
 }
