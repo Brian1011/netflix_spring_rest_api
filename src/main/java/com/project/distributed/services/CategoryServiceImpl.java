@@ -55,7 +55,7 @@ public class CategoryServiceImpl implements CategoryService {
 
         // create a new category
         Category new_cat = new Category(foundCategory.getCategoryName());
-        System.out.println(foundCategory.getMovieSet());
+        //System.out.println(foundCategory.getMovieSet());
 
         // get the movies from the category
         Set<Movie> myMovie = foundCategory.getMovieSet();
