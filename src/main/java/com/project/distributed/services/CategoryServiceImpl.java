@@ -7,7 +7,9 @@ import com.project.distributed.repositories.CategoryRepository;
 import com.project.distributed.repositories.MovieRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class CategoryServiceImpl implements CategoryService {
@@ -47,22 +49,31 @@ public class CategoryServiceImpl implements CategoryService {
 
     @Override
     public Category findAvailableMovie(long id, String type) {
-        //look for the object first
-        //Category home = findById(id);
+        //get the category based on the id
+        Category foundCategory = categoryRepository.findById(id).orElseThrow(()
+                ->new NotFoundException("No category with the id" + id));
 
-        String response = "Id: "+id+" \n Type: "+type;
-        System.out.println(response);
-        if(type.equals("original")){
-            System.out.println("original");
-            return categoryRepository.findCatBySuggested(id,type);
-        }else if(type.equals("suggested")){
-            System.out.println("suggested");
-            return categoryRepository.findCatBySuggested(id,type);
-        }else {
-            System.out.println("others");
-            return categoryRepository.findCatBySuggested(id,type);
-            //return categoryRepository.fi(id, type);
+        // create a new category
+        Category new_cat = new Category(foundCategory.getCategoryName());
+        System.out.println(foundCategory.getMovieSet());
+
+        // get the movies from the category
+        Set<Movie> myMovie = foundCategory.getMovieSet();
+
+        // create a new set
+        Set<Movie> foundMovies = new HashSet<>();
+
+        // filter and add movie to new set if its found
+        for(Movie m : myMovie){
+            if(m.getType().equals(type)){
+                foundMovies.add(m);
+                new_cat.addMovie(m);
+            }
         }
+
+        // set the movie set of the category
+        foundCategory.setMovieSet(foundMovies);
+        return foundCategory;
     }
 
     @Override
@@ -76,15 +87,5 @@ public class CategoryServiceImpl implements CategoryService {
 
         foundCategory.addMovie(foundMovie);
         return categoryRepository.save(foundCategory);
-
-//        return categoryRepository.findById(id).orElseThrow(()
-//                ->new NotFoundException("No category with the id" + id));
-        //return foundCategory
-    }
-
-    @Override
-    public Category addMovieToCat(Long id) {
-        return categoryRepository.findById(id).orElseThrow(()
-                ->new NotFoundException("No category with the id" + id));
     }
 }
