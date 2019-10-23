@@ -12,4 +12,6 @@ public interface ClientService {
     Client createClient(Client client);
 
     Client update(Client client);
+
+    void deleteClient(long id);
 }

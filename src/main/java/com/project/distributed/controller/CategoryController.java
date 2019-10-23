@@ -62,4 +62,10 @@ public class CategoryController {
     Category addMovieToCategory(@PathVariable long id, @PathVariable long movieId){
         return categoryService.addMovieToCategory(id, movieId);
     }
+
+    // delete category
+    @DeleteMapping(value = "/delete/{id}")
+    public void deletedCat(@PathVariable long id){
+        categoryService.deleteCat(id);
+    };
 }

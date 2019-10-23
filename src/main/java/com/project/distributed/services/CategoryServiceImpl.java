@@ -88,4 +88,12 @@ public class CategoryServiceImpl implements CategoryService {
         foundCategory.addMovie(foundMovie);
         return categoryRepository.save(foundCategory);
     }
+
+    @Override
+    public void deleteCat(long id) {
+        // look for the object first
+        Category found = findById(id);
+        // erase
+        categoryRepository.deleteById(id);
+    }
 }

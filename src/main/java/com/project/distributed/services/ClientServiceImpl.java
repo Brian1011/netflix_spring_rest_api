@@ -41,4 +41,14 @@ public class ClientServiceImpl implements ClientService {
         found.setNationalId(client.getNationalId());
         return clientRepository.save(found);
     }
+
+    @Override
+    public void deleteClient(long id) {
+        // look for the object
+        Client found = findById(id);
+
+        // erase
+        clientRepository.deleteById(id);
+    }
+
 }

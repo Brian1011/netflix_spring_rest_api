@@ -28,6 +28,12 @@ public class ClientController {
         return clientService.findById(id);
     }
 
+    //delete client
+    @DeleteMapping(value = "{id}")
+    public @ResponseBody void deleteClient(@PathVariable long id){
+        clientService.deleteClient(id);
+    }
+
     // create client
     @PostMapping
     Client createClient(
@@ -47,5 +53,6 @@ public class ClientController {
     {
         return clientService.update(client);
     }
+
 
 }
