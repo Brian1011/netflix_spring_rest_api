@@ -43,12 +43,20 @@ public class ClientServiceImpl implements ClientService {
     }
 
     @Override
-    public void deleteClient(long id) {
+    public String deleteClient(long id) {
+        String message = "";
         // look for the object
         Client found = findById(id);
 
-        // erase
-        clientRepository.deleteById(id);
+        // check if client has a movie
+        if(found.getSuggestedMovies().isEmpty()){
+            message = "Client "+found.getName()+" records have been erased";
+            clientRepository.deleteById(id);
+        }else{
+            message = "Client "+found.getName()+" has " + found.getSuggestedMovies().size()+" suggested movies";
+        }
+
+        return message;
     }
 
 }

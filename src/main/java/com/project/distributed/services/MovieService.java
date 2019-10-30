@@ -13,7 +13,7 @@ public interface MovieService {
 
     Movie update(Movie movie);
 
-    void delete(long id);
+    String delete(long id);
 
     List<Movie> searchMovie(String movieName);
 

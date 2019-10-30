@@ -58,12 +58,15 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public void delete(long id) {
+    public String delete(long id) {
+        String message = "Movie";
         //look for the object first
         Movie found = findById(id);
 
         //erase movie
         movieRepository.deleteById(id);
+
+        return message;
     }
 
     @Override

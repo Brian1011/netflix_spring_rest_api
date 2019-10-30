@@ -30,8 +30,8 @@ public class ClientController {
 
     //delete client
     @DeleteMapping(value = "{id}")
-    public @ResponseBody void deleteClient(@PathVariable long id){
-        clientService.deleteClient(id);
+    public String deleteClient(@PathVariable long id){
+        return clientService.deleteClient(id);
     }
 
     // create client

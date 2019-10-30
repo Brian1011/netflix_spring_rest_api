@@ -50,8 +50,8 @@ public class MovieController {
 
     // delete movie
     @DeleteMapping(value = "{id}")
-    public void deleteMovie(@PathVariable long id){
-        movieService.delete(id);
+    public String deleteMovie(@PathVariable long id){
+        return movieService.delete(id);
     }
 
     // search movie
