@@ -19,7 +19,7 @@ public class Client {
 
     @NotNull(groups = Create.class)
     @NotNull(groups = Update.class)
-    @Column(name = "national_id")
+    @Column(name = "national_id", unique = true)
     private long nationalId;
 
     @NotNull(groups = Create.class)
