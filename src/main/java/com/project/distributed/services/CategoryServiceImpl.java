@@ -90,10 +90,19 @@ public class CategoryServiceImpl implements CategoryService {
     }
 
     @Override
-    public void deleteCat(long id) {
+    public String deleteCat(long id) {
+        String message = "";
         // look for the object first
         Category found = findById(id);
-        // erase
-        categoryRepository.deleteById(id);
+
+        // check if category has movies
+        if(found.getMovieSet().isEmpty()){
+            message = "Category "+found.getCategoryName()+" records have been erased";
+            categoryRepository.deleteById(id);
+        }else{
+            message = "Category "+found.getCategoryName()+" has " + found.getMovieSet().size()+" suggested movies";
+        }
+
+       return message;
     }
 }

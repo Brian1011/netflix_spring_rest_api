@@ -17,5 +17,5 @@ public interface CategoryService {
 
     Category addMovieToCategory(long id, long movieId);
 
-    void deleteCat(long id);
+    String deleteCat(long id);
 }
