@@ -5,15 +5,15 @@ import com.project.distributed.models.Movie;
 import java.util.List;
 
 public interface MovieService {
-    Movie createMovie(Movie movie);
+    Movie createMovie(Movie movie, String type);
 
     List<Movie> findAll();
 
     Movie findById(long id);
 
-    Movie update(Movie movie);
+    Movie update(Movie movie, String type);
 
-    String delete(long id);
+    String delete(long id, String type);
 
     List<Movie> searchMovie(String movieName);
 

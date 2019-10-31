@@ -1,6 +1,7 @@
 package com.project.distributed.services;
 
 import com.project.distributed.NotFoundException;
+import com.project.distributed.UnauthorizedException;
 import com.project.distributed.models.Category;
 import com.project.distributed.models.Client;
 import com.project.distributed.models.Movie;
@@ -29,8 +30,13 @@ public class MovieServiceImpl implements MovieService {
 
 
     @Override
-    public Movie createMovie(Movie movie) {
-        return movieRepository.save(movie);
+    public Movie createMovie(Movie movie, String type) {
+        if (type.equals("admin")){
+            return movieRepository.save(movie);
+        }else {
+            throw new UnauthorizedException("You are not authorized to create a movie");
+        }
+
     }
 
     @Override
@@ -46,27 +52,36 @@ public class MovieServiceImpl implements MovieService {
     }
 
     @Override
-    public Movie update(Movie movie) {
-        //look for the object
-        Movie found = findById(movie.getId());
+    public Movie update(Movie movie, String type) {
+        if(type.equals("admin")){
+            //look for the object
+            Movie found = findById(movie.getId());
 
-        //update movie
-        found.setName(movie.getName());
-        found.setCategory(movie.getCategory());
-        found.setType(movie.getType());
-        return movieRepository.save(found);
+            //update movie
+            found.setName(movie.getName());
+            found.setCategory(movie.getCategory());
+            found.setType(movie.getType());
+            return movieRepository.save(found);
+        }else{
+            throw new UnauthorizedException("You are not authorized to update this movie");
+        }
     }
 
     @Override
-    public String delete(long id) {
-        String message = "Movie";
-        //look for the object first
-        Movie found = findById(id);
+    public String delete(long id, String type) {
+        if (type.equals("admin")){
+            String message = "Movie";
+            //look for the object first
+            Movie found = findById(id);
 
-        //erase movie
-        movieRepository.deleteById(id);
+            //erase movie
+            movieRepository.deleteById(id);
 
-        return message;
+            return message;
+        }else {
+            throw new UnauthorizedException("You are not authorized to delete this movie");
+        }
+
     }
 
     @Override

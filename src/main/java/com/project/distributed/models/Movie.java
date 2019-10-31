@@ -48,6 +48,7 @@ public class Movie {
         this.type = type;
     }
 
+
     public long getId() {
         return id;
     }

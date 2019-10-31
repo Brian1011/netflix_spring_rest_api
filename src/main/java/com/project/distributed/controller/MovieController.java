@@ -19,11 +19,12 @@ public class MovieController {
     // add new movie
     @PostMapping
     Movie createMovie(
+            @RequestParam String type, // type = admin
             @Validated(Movie.Create.class)
             @RequestBody Movie movie
             )
     {
-        return movieService.createMovie(movie);
+        return movieService.createMovie(movie, type);
     }
 
     //get all movies
@@ -41,17 +42,21 @@ public class MovieController {
     // update movie
     @PatchMapping
     public Movie updateMovie(
+            @RequestParam String type, // type = admin
             @Validated(Movie.Update.class)
             @RequestBody Movie movie
     )
     {
-        return movieService.update(movie);
+        return movieService.update(movie, type);
     }
 
     // delete movie
     @DeleteMapping(value = "{id}")
-    public String deleteMovie(@PathVariable long id){
-        return movieService.delete(id);
+    public String deleteMovie(
+            @RequestParam String type, // type = admin
+            @PathVariable long id
+    ){
+        return movieService.delete(id, type);
     }
 
     // search movie
@@ -72,5 +77,10 @@ public class MovieController {
         return movieService.suggestedMovie(movie, id);
     }
 
+    // client edit movie
+//    Movie clientEditMovie(
+//            @Validated(Movie.Update.class)
+//            @PATH
+//    )
 
 }
