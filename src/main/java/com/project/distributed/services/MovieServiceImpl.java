@@ -109,4 +109,51 @@ public class MovieServiceImpl implements MovieService {
         return new_movie;
     }
 
+    @Override
+    public Movie update(Movie movie, Long clientId) {
+        // check if client is authorized
+        // get client by id
+        Client foundClient = clientRepository.findById(clientId).orElseThrow(()
+                ->new NotFoundException("No client with the id: "+clientId));
+
+        //look for the object
+        Movie foundMovie = findById(movie.getId());
+
+        // check if client owns movie
+        SuggestedMovie suggestedMovie = suggestedMovieRepository.findByMovieAndClient(foundMovie, foundClient);
+
+        if (suggestedMovie != null) {
+            //update movie
+            foundMovie.setName(movie.getName());
+            foundMovie.setCategory(movie.getCategory());
+            foundMovie.setType(movie.getType());
+            return movieRepository.save(foundMovie);
+        }else {
+            throw new UnauthorizedException("You are not the owner of this movie. You cannot update it");
+        }
+    }
+
+    @Override
+    public String delete(long clientId, long movieId) {
+        // check if client is authorized
+        // get client by id
+        Client foundClient = clientRepository.findById(clientId).orElseThrow(()
+                ->new NotFoundException("No client with the id: "+clientId));
+
+        //look for the movie
+        Movie foundMovie = findById(movieId);
+        Movie found = findById(movieId);
+
+        // check if client owns movie
+        SuggestedMovie suggestedMovie = suggestedMovieRepository.findByMovieAndClient(foundMovie, foundClient);
+
+        if (suggestedMovie != null) {
+            //delete movie
+            movieRepository.deleteById(movieId);
+            return "Movie "+foundMovie.getName()+" has been erased";
+        }else {
+            throw new UnauthorizedException("You are not the owner of this movie. You cannot delete it");
+        }
+    }
+
 }

@@ -17,5 +17,8 @@ public interface MovieService {
 
     List<Movie> searchMovie(String movieName);
 
+    // clients suggested
     Movie suggestedMovie(Movie movie, long id);
+    Movie update(Movie movie, Long clientId);
+    String delete(long clientId, long movieId);
 }

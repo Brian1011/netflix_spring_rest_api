@@ -67,20 +67,33 @@ public class MovieController {
 
     // client suggest a movie
     // add new movie
-    @PostMapping(value = "/suggest/{id}")
+    @PostMapping(value = "/suggest/{clientId}")
     Movie clientSuggestMovie(
             @Validated(Movie.Create.class)
-            @PathVariable long id,
+            @PathVariable long clientId,
             @RequestBody Movie movie
     )
     {
-        return movieService.suggestedMovie(movie, id);
+        return movieService.suggestedMovie(movie, clientId);
     }
 
-    // client edit movie
-//    Movie clientEditMovie(
-//            @Validated(Movie.Update.class)
-//            @PATH
-//    )
+    // update suggest movie
+    @PatchMapping(value = "/suggest/{clientId}")
+    public Movie updateMovie(
+            @Validated(Movie.Update.class)
+            @RequestBody Movie movie,
+            @PathVariable Long clientId
+    )
+    {
+        return movieService.update(movie, clientId);
+    }
 
+    //delete suggested movie
+    @DeleteMapping(value = "/suggest/{clientId}/movie/{movieId}")
+    public String deleteMovie(
+            @PathVariable long clientId,
+            @PathVariable long movieId
+    ){
+        return movieService.delete(clientId, movieId);
+    }
 }

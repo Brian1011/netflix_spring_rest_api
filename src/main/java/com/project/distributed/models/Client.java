@@ -27,7 +27,7 @@ public class Client {
     @Column(name = "name")
     private String name;
 
-    @JsonIgnore
+    //@JsonIgnore
     @OneToMany(mappedBy = "client")
     private List<SuggestedMovie> suggestedMovies;
 
