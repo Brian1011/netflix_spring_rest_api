@@ -148,6 +148,9 @@ public class MovieServiceImpl implements MovieService {
         SuggestedMovie suggestedMovie = suggestedMovieRepository.findByMovieAndClient(foundMovie, foundClient);
 
         if (suggestedMovie != null) {
+            // delete from suggested movie then fom
+            suggestedMovieRepository.deleteById(suggestedMovie.getId());
+
             //delete movie
             movieRepository.deleteById(movieId);
             return "Movie "+foundMovie.getName()+" has been erased";
